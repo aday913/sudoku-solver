@@ -12,9 +12,9 @@ class SudokuManager():
             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
         ]
 
-        self.parse_input_board(start_board)
+        self._parse_input_board(start_board)
 
-    def parse_input_board(self, file_):
+    def _parse_input_board(self, file_):
         data = []
         with open(file_, 'r') as input_file:
             for i in input_file:
@@ -25,7 +25,7 @@ class SudokuManager():
                 val = data[(row*2)-1][(col*4)-2]
                 self.board_vals[row-1][col-1] = str(val)
     
-    def get_print_board(self):
+    def get_print_board(self) -> str:
         vals = self.board_vals
         print_board = f"""
             |---|---|---I---|---|---I---|---|---|
@@ -50,10 +50,27 @@ class SudokuManager():
             """
         return print_board
 
-    def get_val_board(self):
+    def get_val_board(self) -> list:
         return self.board_vals
     
-    def is_valid_board(self, vals):
+    def check_if_won(self, board : list) -> bool:
+        """Return bool of whether a board is complete
+
+        Args:
+            board (list): contains valus of all cells of a game board
+
+        Returns:
+            bool: whether board is complete
+        """
+        if not self.is_valid_board(board):
+            return False
+        for row in board:
+            if ' ' in row:
+                return False
+        else:
+            return True
+    
+    def is_valid_board(self, vals : list) -> bool:
         # Check rows:
         for row in vals:
             for i in range(1, 10):

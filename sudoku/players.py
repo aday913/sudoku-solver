@@ -21,7 +21,7 @@ class SudokuPlayer():
         else:
             print(f'{value} is not a valid sudoku square value, try again')
     
-    def get_kb(self):
+    def get_kb(self) -> dict:
         return self.knowledge_base
 
     def get_kb_for_loc(self, loc):

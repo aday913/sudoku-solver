@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 from sudoku.game import SudokuManager
 from sudoku.players import SudokuPlayer, ManualPlayer, BruteForcePlayer
@@ -12,24 +13,13 @@ class SudokuGame():
         self.player  = player
     
     def get_next_move(self):
-        self.check_if_won()
-
-    def check_if_won(self, board : list) -> bool:
-        """Return bool of whether a board is complete
-
-        Args:
-            board (list): contains valus of all cells of a game board
-
-        Returns:
-            bool: whether board is complete
-        """
-        if not self.manager.is_valid_board(board):
-            return False
-        for row in board:
-            if ' ' in row:
-                return False
+        won_bool = self.manger.check_if_won()
+        if won_bool:
+            print('Congratulation! You have won the game!')
+            sys.exit()
         else:
-            return True
+            
+        
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -39,5 +29,5 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
 
-    sudoku = SudokuManager(args.board)
-    print(sudoku.get_print_board())
+    game = SudokuGame(SudokuPlayer,args.board)
+    print(game.manager.get_print_board())
