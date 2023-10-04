@@ -35,6 +35,10 @@ class ManualPlayer(SudokuPlayer):
         super().__init__()
     
     
-class BruteForcePlayer(SudokuPlayer):
+class LogicPlayer(SudokuPlayer):
+    def __init__(self):
+        super().__init__()
+        
+class SearchPlayer(SudokuPlayer):
     def __init__(self):
         super().__init__()
