@@ -12,9 +12,9 @@ class SudokuManager():
             [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
         ]
 
-        self._parse_input_board(start_board)
+        self.board_vals = self._parse_input_board(start_board, self.board_vals)
 
-    def _parse_input_board(self, file_):
+    def _parse_input_board(self, file_, input_board):
         data = []
         with open(file_, 'r') as input_file:
             for i in input_file:
@@ -23,7 +23,8 @@ class SudokuManager():
         for row in range(1,10):
             for col in range(1,10):
                 val = data[(row*2)-1][(col*4)-2]
-                self.board_vals[row-1][col-1] = str(val)
+                input_board[row-1][col-1] = str(val)
+        return input_board
     
     def get_print_board(self) -> str:
         vals = self.board_vals
